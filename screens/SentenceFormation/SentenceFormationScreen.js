@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { View, TouchableOpacity, Text, StyleSheet, Image,Dimensions } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Audio } from "expo-av";
-const Main = (props) => {
-  let [alphabets, setAlphabet] = useState(["ज", "आ", "म्र", "म्", "म्‍"]);
+const SentenceFormationScreen = (props) => {
+  let [alphabets, setAlphabet] = useState(["अहं", "क्रीडामि", "क्रीडसि", "क्रीडति"]);
   let [answeres, setAnswers] = useState([]);
   let [success, setSuccess] = useState("");
   const [sound, setSound] = React.useState();
   let [count, setCount] = useState(0);
-  let correct = ["आ", "म्र", "म्"];
+  let correct = ["अहं", "क्रीडामि"];
   const change = (index) => {
     if (correct.length > count) {
       let val = alphabets[index];
@@ -82,30 +82,35 @@ const Main = (props) => {
             </View>
         </View>
      <View style={{alignItems:'center',backgroundColor:'#050637',width:Dimensions.get('window').width,flex:0.6,Top:'20%',borderBottomLeftRadius:250,borderBottomRightRadius:250}}>
-     <Text style={{ fontSize: 30,fontWeight:'bold',color:'white',marginTop:'5%' }}>त्रि अक्षर शब्द</Text>
+     <Text style={{ fontSize: 30,fontWeight:'bold',color:'white',marginTop:'5%' }}>द्वि शब्द वाक्यांश</Text>
       <Text style={{fontSize: 20 ,color:'white'}}>
-        (It is three alphabet word)
+        (Two word sentence)
       </Text>
       <View style={{ flexDirection: "row" }}>
         {alphabets.map((alphabet, index) => (
-          <TouchableOpacity key={index} onPress={() => change(index)}>
+         (index%2==0)&& <TouchableOpacity key={index} onPress={() => change(index)}>
             <Text style={styles.text}  >{alphabet}</Text>
           </TouchableOpacity>
         ))}
       </View>
-      <View style={{backgroundColor:'#ffcc00',borderRadius:500,marginTop:'10%',position:'absolute',top:'45%'}}>
-      <Image
-        source={{ uri: "https://lh3.googleusercontent.com/proxy/vZpTSBjVnMgK7itA2kRsFJAUXwKnWiSRQVpFrwBxmifcMf2u6m1GBUU2EWHdfHwRfHK95ZBKMauFcCSSSeO8FYCyqjxehp8fKKNA1BSY9qWCCo8SCBF_3HdhYLnkBLqdZslS8HWUOtc" }}
-        style={{ height: 200, width: 200 }}
-      />
+      <View style={{ flexDirection: "row" }}>
+        {alphabets.map((alphabet, index) => (
+         (index%2!==0)&& <TouchableOpacity key={index} onPress={() => change(index)}>
+            <Text style={styles.text}  >{alphabet}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
      </View>
-      <View style={{flex:0.57,alignItems:'center',justifyContent:'center'}}>
+      <View style={{flex:0.57,alignItems:'center',justifyContent:'space-around'}}>
+       <View style={{alignItems:'center'}}>
+       <Text style={{fontSize:20,color:'white'}}>The Sentence to be formed is</Text>
+        <Text style={{fontSize:20,color:'white'}}>I play</Text>
+       </View>
       <View style={{ flexDirection: "row"}}>
         {answeres.map((answere, index) => (
           <TouchableOpacity key={index}
             onPress={() => changeAnswere(index)}
-            style={{ padding: 2,marginTop:'25%' }}
+            style={{ padding: 2 }}
           >
             <View
               style={{ borderColor: "black", borderWidth: 2, borderRadius: 10 }}
@@ -149,6 +154,8 @@ const Main = (props) => {
     </View>
   );
 };
+export default SentenceFormationScreen;
+
 const styles = StyleSheet.create({
   container: {
       flex:1,
@@ -162,4 +169,3 @@ const styles = StyleSheet.create({
     color:'white'
   },
 });
-export default Main;

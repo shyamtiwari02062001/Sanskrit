@@ -4,7 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import SplashScreen from './screens/Splash/Splashscreen';
 import DashboardScreen from './screens/Dashboard/Dashboardscreen';
 import WordFormationScreen from './screens/WordFormation/WordFormationScreen';
-import OddOneOutScreen from './screens/OddOneOUt/OddOneOutScreen'
+import OddOneOutScreen from './screens/OddOneOUt/OddOneOutScreen';
+import SentenceFormation from './screens/SentenceFormation/SentenceFormationScreen';
 const Stack = createStackNavigator();
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Stack.Screen name="Dashboard" component={DashboardScreen} />
         <Stack.Screen name="WordFormation" component={WordFormationScreen} />
         <Stack.Screen name="OddOneOut" component={OddOneOutScreen} />
+        <Stack.Screen name="SentenceFormation" component={SentenceFormation} />
       </Stack.Navigator>
     </NavigationContainer>
   );
