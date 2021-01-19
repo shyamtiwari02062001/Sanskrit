@@ -44,7 +44,7 @@ const SentenceFormationScreen = (props) => {
   async function PlaySound() {
     console.log("Loading Sound");
     const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/mango.mp3")
+      require("../../assets/IPlay.mp3")
     );
     setSound(sound);
 

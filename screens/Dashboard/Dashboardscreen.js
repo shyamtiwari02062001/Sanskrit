@@ -5,7 +5,7 @@ const DashboardScreen=(props)=>{
     return (
         <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
             <LinearGradient
-          colors={['#B7F8DB', '#50A7C2']}
+          colors={[ '#EDDE5D','#F09819']}
           style={{flex:1,width:Dimensions.get('window').width,alignItems:'center',justifyContent:'space-evenly'}}
         >
             <TouchableOpacity style={styles.shape} onPress={()=>props.navigation.navigate('WordFormation')}>
