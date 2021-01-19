@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import SplashScreen from './screens/Splash/Splashscreen';
-import DashboardScreen from './screens/Dashboard/Dashboardscreen';
-import WordFormationScreen from './screens/WordFormation/WordFormationScreen';
-import OddOneOutScreen from './screens/OddOneOUt/OddOneOutScreen';
-import SentenceFormation from './screens/SentenceFormation/SentenceFormationScreen';
+import * as React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import SplashScreen from "./screens/Splash/Splashscreen";
+import DashboardScreen from "./screens/Dashboard/Dashboardscreen";
+import WordFormationScreen from "./screens/WordFormation/WordFormationScreen";
+import OddOneOutScreen from "./screens/OddOneOUt/OddOneOutScreen";
+import SentenceFormation from "./screens/SentenceFormation/SentenceFormationScreen";
 const Stack = createStackNavigator();
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerShown: false
+          headerShown: false,
         }}
         initialRouteName="Splash"
       >

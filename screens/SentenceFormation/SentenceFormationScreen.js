@@ -1,9 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, Text, StyleSheet, Image,Dimensions } from "react-native";
-import { LinearGradient } from 'expo-linear-gradient';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import { Audio } from "expo-av";
 const SentenceFormationScreen = (props) => {
-  let [alphabets, setAlphabet] = useState(["अहं", "क्रीडामि", "क्रीडसि", "क्रीडति"]);
+  let [alphabets, setAlphabet] = useState([
+    "अहं",
+    "क्रीडामि",
+    "क्रीडसि",
+    "क्रीडति",
+  ]);
   let [answeres, setAnswers] = useState([]);
   let [success, setSuccess] = useState("");
   const [sound, setSound] = React.useState();
@@ -62,93 +74,248 @@ const SentenceFormationScreen = (props) => {
   }, [sound]);
   return (
     <View style={styles.container}>
-       <LinearGradient
-          colors={['#f04ca0', '#552fea']}
-          style={{flex:1,width:Dimensions.get('window').width,alignItems:'center'}}
+      <LinearGradient
+        colors={["#f04ca0", "#552fea"]}
+        style={{
+          flex: 1,
+          width: Dimensions.get("window").width,
+          alignItems: "center",
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            backgroundColor: "#050637",
+            width: Dimensions.get("window").width,
+            justifyContent: "space-between",
+          }}
         >
-         <View style={{flexDirection:'row',backgroundColor:'#050637',width:Dimensions.get('window').width,justifyContent:'space-between'}}>
-<View style={{marginLeft:'5%',marginTop:'7%'}}>
-    <TouchableOpacity onPress={()=>props.navigation.navigate('Dashboard')}>
-<Image source={require('../../assets/back.png')} style={{height:20,width:20,tintColor:'white'}}/>
-
-    </TouchableOpacity>
-</View>        
-        <View style={{marginTop:'7%',flexDirection:'row',position:'relative',alignItems:'center',marginRight:20}}>
-                <Image source={require('../../assets/coin.png')} style={{height:20,width:20}}/>
-                <Text style={{color:'white',fontSize:20,paddingLeft:10}}>3457</Text>
-                <View style={{paddingLeft:10}}>
-                    <Image source={require('../../assets/add.png')} style={{height:20,width:20,tintColor:'red'}}/>
-                </View>
-            </View>
-        </View>
-     <View style={{alignItems:'center',backgroundColor:'#050637',width:Dimensions.get('window').width,flex:0.6,Top:'20%',borderBottomLeftRadius:250,borderBottomRightRadius:250}}>
-     <Text style={{ fontSize: 30,fontWeight:'bold',color:'white',marginTop:'5%' }}>द्वि शब्द वाक्यांश</Text>
-      <Text style={{fontSize: 20 ,color:'white'}}>
-        (Two word sentence)
-      </Text>
-      <View style={{ flexDirection: "row" }}>
-        {alphabets.map((alphabet, index) => (
-         (index%2==0)&& <TouchableOpacity key={index} onPress={() => change(index)}>
-            <Text style={styles.text}  >{alphabet}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <View style={{ flexDirection: "row" }}>
-        {alphabets.map((alphabet, index) => (
-         (index%2!==0)&& <TouchableOpacity key={index} onPress={() => change(index)}>
-            <Text style={styles.text}  >{alphabet}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-     </View>
-      <View style={{flex:0.57,alignItems:'center',justifyContent:'space-around'}}>
-       <View style={{alignItems:'center'}}>
-       <Text style={{fontSize:20,color:'white'}}>The Sentence to be formed is</Text>
-        <Text style={{fontSize:20,color:'white'}}>I play</Text>
-       </View>
-      <View style={{ flexDirection: "row"}}>
-        {answeres.map((answere, index) => (
-          <TouchableOpacity key={index}
-            onPress={() => changeAnswere(index)}
-            style={{ padding: 2 }}
-          >
-            <View
-              style={{ borderColor: "black", borderWidth: 2, borderRadius: 10 }}
+          <View style={{ marginLeft: "5%", marginTop: "7%" }}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate("Dashboard")}
             >
-              <Text style={[styles.text]}>{answere}</Text>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </View>
-      {success === "true" && (
-         <View style={{flexDirection:'row',marginTop:'7%'}}>
-         <Text style={{fontSize: 20,color:'green',textAlign:'center',backgroundColor:'#050637',padding:10 ,width:'40%',fontWeight:'bold',borderTopLeftRadius:25,borderBottomLeftRadius:25}}>उचित (Right)</Text>
-         <TouchableOpacity
-           onPress={() => {
-             PlaySound();
-           }}
-         >
-          <View style={{backgroundColor:'#ffcc00',padding:10,borderTopRightRadius:25,borderBottomRightRadius:25}}>
-          <Image
-             source={require("../../assets/volume.png")}
-             style={{ height: 30, width: 30, tintColor:'#050637',marginLeft:4}}
-           />
+              <Image
+                source={require("../../assets/back.png")}
+                style={{ height: 20, width: 20, tintColor: "white" }}
+              />
+            </TouchableOpacity>
           </View>
-         </TouchableOpacity>
-       </View>
-       
-     )}
-      {success === "wrong" && <View style={{marginTop:'7%'}}><Text style={{fontSize: 20, textAlign:'center',width:'70%', color:'#fc0124',backgroundColor:'#050637',padding:11,fontWeight:'bold' ,borderRadius:50}}>दोषपूर्ण (Wrong)</Text>
-      </View>}
-      </View>
-      <View style={{flexDirection:'row',justifyContent:'space-between',width:'70%',marginLeft:'5%',marginBottom:'5%'}}>
-<TouchableOpacity>
-<Text style={{fontSize:15,textAlign:'center',color:'white',fontWeight:'bold'}}>प्राथमिक</Text>
-<Text style={{fontSize:15,textAlign:'center',color:'white',fontWeight:'bold'}}>( PREV )</Text>
-  </TouchableOpacity><TouchableOpacity>
-<Text style={{fontSize:15,textAlign:'center',color:'white',fontWeight:'bold'}}>अग्रीम</Text>
-<Text style={{fontSize:15,textAlign:'center',color:'white',fontWeight:'bold'}}>( NEXT )</Text>
-  </TouchableOpacity>   
+          <View
+            style={{
+              marginTop: "7%",
+              flexDirection: "row",
+              position: "relative",
+              alignItems: "center",
+              marginRight: 20,
+            }}
+          >
+            <Image
+              source={require("../../assets/coin.png")}
+              style={{ height: 20, width: 20 }}
+            />
+            <Text style={{ color: "white", fontSize: 20, paddingLeft: 10 }}>
+              3457
+            </Text>
+            <View style={{ paddingLeft: 10 }}>
+              <Image
+                source={require("../../assets/add.png")}
+                style={{ height: 20, width: 20, tintColor: "red" }}
+              />
+            </View>
+          </View>
+        </View>
+        <View
+          style={{
+            alignItems: "center",
+            backgroundColor: "#050637",
+            width: Dimensions.get("window").width,
+            flex: 0.6,
+            Top: "20%",
+            borderBottomLeftRadius: 250,
+            borderBottomRightRadius: 250,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 30,
+              fontWeight: "bold",
+              color: "white",
+              marginTop: "5%",
+            }}
+          >
+            द्वि शब्द वाक्यांश
+          </Text>
+          <Text style={{ fontSize: 20, color: "white" }}>
+            (Two word sentence)
+          </Text>
+          <View style={{ flexDirection: "row", marginTop: "10%" }}>
+            {alphabets.map(
+              (alphabet, index) =>
+                index % 2 == 0 && (
+                  <TouchableOpacity key={index} onPress={() => change(index)}>
+                    <Text style={styles.text}>{alphabet}</Text>
+                  </TouchableOpacity>
+                )
+            )}
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            {alphabets.map(
+              (alphabet, index) =>
+                index % 2 !== 0 && (
+                  <TouchableOpacity key={index} onPress={() => change(index)}>
+                    <Text style={styles.text}>{alphabet}</Text>
+                  </TouchableOpacity>
+                )
+            )}
+          </View>
+        </View>
+        <View
+          style={{
+            flex: 0.57,
+            alignItems: "center",
+            justifyContent: "space-around",
+          }}
+        >
+          <View style={{ alignItems: "center" }}>
+            <Text style={{ fontSize: 20, color: "white" }}>
+              The Sentence to be formed is
+            </Text>
+            <Text style={{ fontSize: 20, color: "white" }}>I play</Text>
+          </View>
+          <View style={{ flexDirection: "row" }}>
+            {answeres.map((answere, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => changeAnswere(index)}
+                style={{ padding: 2 }}
+              >
+                <View
+                  style={{
+                    borderColor: "black",
+                    borderWidth: 2,
+                    borderRadius: 10,
+                  }}
+                >
+                  <Text style={[styles.text]}>{answere}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
+          {success === "true" && (
+            <View style={{ flexDirection: "row", marginTop: "7%" }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  color: "green",
+                  textAlign: "center",
+                  backgroundColor: "#050637",
+                  padding: 10,
+                  width: "40%",
+                  fontWeight: "bold",
+                  borderTopLeftRadius: 25,
+                  borderBottomLeftRadius: 25,
+                }}
+              >
+                उचित (Right)
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  PlaySound();
+                }}
+              >
+                <View
+                  style={{
+                    backgroundColor: "#ffcc00",
+                    padding: 10,
+                    borderTopRightRadius: 25,
+                    borderBottomRightRadius: 25,
+                  }}
+                >
+                  <Image
+                    source={require("../../assets/volume.png")}
+                    style={{
+                      height: 30,
+                      width: 30,
+                      tintColor: "#050637",
+                      marginLeft: 4,
+                    }}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
+          {success === "wrong" && (
+            <View style={{ marginTop: "7%" }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  textAlign: "center",
+                  width: "70%",
+                  color: "#fc0124",
+                  backgroundColor: "#050637",
+                  padding: 11,
+                  fontWeight: "bold",
+                  borderRadius: 50,
+                }}
+              >
+                दोषपूर्ण (Wrong)
+              </Text>
+            </View>
+          )}
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: "70%",
+            marginLeft: "5%",
+            marginBottom: "5%",
+          }}
+        >
+          <TouchableOpacity>
+            <Text
+              style={{
+                fontSize: 15,
+                textAlign: "center",
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
+              प्राथमिक
+            </Text>
+            <Text
+              style={{
+                fontSize: 15,
+                textAlign: "center",
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
+              ( PREV )
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text
+              style={{
+                fontSize: 15,
+                textAlign: "center",
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
+              अग्रीम
+            </Text>
+            <Text
+              style={{
+                fontSize: 15,
+                textAlign: "center",
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
+              ( NEXT )
+            </Text>
+          </TouchableOpacity>
         </View>
       </LinearGradient>
     </View>
@@ -158,14 +325,14 @@ export default SentenceFormationScreen;
 
 const styles = StyleSheet.create({
   container: {
-      flex:1,
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
   text: {
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: "bold",
     padding: 10,
-    color:'white'
+    color: "white",
   },
 });
